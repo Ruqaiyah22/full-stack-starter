@@ -13,6 +13,8 @@ import Login from './Login';
 import Passwords from './Passwords';
 import Register from './Register';
 import SectionItems from './SectionItems';
+import Components from './Components';
+import Countdown from './Countdown';
 
 function App() {
   return (
@@ -23,6 +25,12 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route path="/components">
+            <Components />
+          </Route>
+          <Route path="/countdown">
+              <Countdown />
+            </Route>
           <Route path="/login">
             <Login />
           </Route>
