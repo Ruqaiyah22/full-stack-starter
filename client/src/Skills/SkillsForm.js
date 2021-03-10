@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {useHistory, useParams} from "react-router-dom";
 import Api from "../Api";
 
-function SectionForm() {
+function SkillsForm() {
     const {id} = useParams();
     const history = useHistory();
     const [section, setSection] = useState({
@@ -60,4 +60,4 @@ function SectionForm() {
     )
 }
 
-export default SectionForm;
+export default SkillsForm;
