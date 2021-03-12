@@ -5,33 +5,31 @@ import Api from "../Api";
 function SkillsForm() {
     const {id} = useParams();
     const history = useHistory();
-    const [section, setSection] = useState({
+    const [skill, setSkills] = useState({
         name: '',
-        slug: '',
-        position: 0
     });
 
     useEffect(function(){
         if (id) {
-            Api.sections.get(id).then((response) => setSection(response.data));
+            Api.skills.get(id).then((response) => setSkills(response.data));
         }
     }, []);
 
     function onChange(event) {
-        const newSection = {...section};
-        newSection[event.target.name] = event.target.value;
-        setSection(newSection);
+        const newSkill = {...skill};
+        newSkill[event.target.name] = event.target.value;
+        setSkills(newSkill);
     }
 
     async function onSubmit(event){
         event.preventDefault();
         try {
             if (id) {
-                await Api.sections.update(id, section);
+                await Api.skills.update(id, skill);
             } else {
-                await Api.sections.create(section);
+                await Api.skills.create(skill);
             }
-            history.push('/sections');
+            history.push('/skills');
         } catch (error) {
             console.log(error);
         }
@@ -39,23 +37,15 @@ function SkillsForm() {
 
     return(
         <main className="container">
-        <h1>Section Form</h1>
+        <h1>Skills Form</h1>
         <form onSubmit={onSubmit}>
         <div className="mb-3">
             <label className="form-label">Name</label>
-            <input className="form-control" type="text" name="name" value={section.name} onChange={onChange} />
-        </div>
-        <div className="mb-3">
-            <label className="form-label">Slug</label>
-            <input className="form-control" type="text" name="slug" value={section.slug} onChange={onChange}/>
-        </div>
-        <div className="mb-3">
-            <label className="form-label">Position</label>
-            <input className="form-control" type="text" name="position" value={section.position} onChange={onChange}/>
+            <input className="form-control" type="text" name="name" value={skill.name} onChange={onChange} />
         </div>
         <button className="btn btn-primary" type="submit">Submit</button>
         </form>
-        <p>{JSON.stringify(section)}</p>
+        <p>{JSON.stringify(skill)}</p>
     </main>
     )
 }

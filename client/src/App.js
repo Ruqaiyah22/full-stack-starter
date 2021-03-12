@@ -15,7 +15,8 @@ import Register from './Register';
 import SectionItems from './SectionItems';
 import Components from './Components';
 import Countdown from './Countdown';
-import Sections from './Sections/Sections'
+import Sections from './Sections/Sections';
+import Skills from './Skills/Skills';
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
           )}
           <Route path="/sections">
               <Sections />
+          </Route>
+          <Route path="/skills">
+              <Skills />
           </Route>
           <AuthProtectedRoute path="/sectionItems">
             <SectionItems />

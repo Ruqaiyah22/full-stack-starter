@@ -9,12 +9,12 @@ function Home() {
   const {user} = useAuthContext();
   const [sections, setSections] = useState([]);
   const [sectionItems, setSectionItems] = useState([]);
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState([]); // added for skills 
 
   useEffect(function() {
     Api.sections.index().then(response => setSections(response.data));
     Api.sectionItems.index().then(response => setSectionItems(response.data));
-    Api.skills.index().then(response => setSkills(response.data));
+    Api.skills.index().then(response => setSkills(response.data)); // added for skills 
   }, []);
 
   const onDelete = function(sectionItem) {
@@ -33,8 +33,8 @@ function Home() {
         <div className="col-md-4">
           <AboutMe />
           <ul>
-            {skills.map(s => <li>{s.name}</li>)}
-          </ul>
+            {skills.map(s => <li>{s.name}</li>)} 
+          </ul> 
         </div>
         <div className="col-md-7 offset-md-1">
           {sections.map(s => {

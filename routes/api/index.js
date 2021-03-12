@@ -9,5 +9,6 @@ router.use('/sectionItems', require('./sectionItems'));
 router.use('/skills', require('./skills'));
 router.use('/uploads', require('./uploads'));
 router.use('/users', require('./users'));
+router.use('/skills', require('./skills')); // added for skills
 
 module.exports = router;
