@@ -5,21 +5,21 @@ const router = express.Router();
 const models = require('../../models');
 
 router.get('/', async function(req, res) { // if it matches
-    const row = await models.Skill.findAll(); // "s" at the end or no?
-    res.json// ([
+    const rows = await models.Skill.findAll(); // "s" at the end or no?
+    res.json(rows); // ([
         // {id: 1, name: 'kaya'}, hardcoded
         // {id: 2, name: 'aisha'}
     //]);
 });
 
 router.post('/', async function (req, res){
-    // build a new skill row in memory from the form data in the body of the request
-    const row = models.Skill.build(req.body);
+    // build a new skill rows in memory from the form data in the body of the request
+    const rows = models.Skill.build(req.body);
     try {
         // wait for the database to save the new row
-        await row.save();
+        await rows.save();
         // if successful, return 201 status (CREATED), amd the JSON data of the row
-        res.status(201).json(row);
+        res.status(201).json(rows);
     } catch (error) {
         // if the database returns an error, print it to the consol
         console.log(error);
@@ -28,16 +28,37 @@ router.post('/', async function (req, res){
     }
 });
 
-// added in this from the sections.js in api folder
-/*
 router.get('/:id', async function(req, res) {
-    const section = await models.Section.findByPk(req.params.id);
-    if (section) {
-      res.json(section);
-    } else {
-      res.status(HttpStatus.NOT_FOUND).end();
+  const rows = await models.Skill.findByPk(req.params.id);
+  if (rows) {
+    res.json(rows);
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
+});
+/*
+router.patch('/:id', interceptors.requireLogin, async function(req, res) {
+  const rows = await models.Skill.findByPk(req.params.id);
+  if (rows) {
+    try {
+      await rows.update(req.body);
+      res.status(HttpStatus.OK).end();  
+    } catch (error) {
+      res.status(HttpStatus.UNPROCESSABLE_ENTITY).json(error);
     }
-  });
-  */
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
+})
+
+router.delete('/:id', interceptors.requireLogin, async function(req, res) {
+  const rows = await models.Skill.findByPk(req.params.id);
+  if (rows) {
+    await rows.destroy();
+    res.status(HttpStatus.OK).end();
+  } else {
+    res.status(HttpStatus.NOT_FOUND).end();
+  }
+});*/
 
 module.exports = router;

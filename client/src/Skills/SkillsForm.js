@@ -5,7 +5,7 @@ import Api from "../Api";
 function SkillsForm() {
     const {id} = useParams();
     const history = useHistory();
-    const [skill, setSkills] = useState({
+    const [skills, setSkills] = useState({
         name: '',
     });
 
@@ -16,7 +16,7 @@ function SkillsForm() {
     }, []);
 
     function onChange(event) {
-        const newSkill = {...skill};
+        const newSkill = {...skills};
         newSkill[event.target.name] = event.target.value;
         setSkills(newSkill);
     }
@@ -25,9 +25,9 @@ function SkillsForm() {
         event.preventDefault();
         try {
             if (id) {
-                await Api.skills.update(id, skill);
+                await Api.skills.update(id, skills);
             } else {
-                await Api.skills.create(skill);
+                await Api.skills.create(skills);
             }
             history.push('/skills');
         } catch (error) {
@@ -41,11 +41,11 @@ function SkillsForm() {
         <form onSubmit={onSubmit}>
         <div className="mb-3">
             <label className="form-label">Name</label>
-            <input className="form-control" type="text" name="name" value={skill.name} onChange={onChange} />
+            <input className="form-control" type="text" name="name" value={skills.name} onChange={onChange} />
         </div>
         <button className="btn btn-primary" type="submit">Submit</button>
         </form>
-        <p>{JSON.stringify(skill)}</p>
+        <p>{JSON.stringify(skills)}</p>
     </main>
     )
 }
