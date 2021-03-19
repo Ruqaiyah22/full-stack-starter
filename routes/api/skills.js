@@ -22,7 +22,7 @@ router.post('/', async function (req, res){
         res.status(201).json(rows);
     } catch (error) {
         // if the database returns an error, print it to the consol
-        console.log(error);
+        // console.log(error);
         // send back the UNPROCESSABLE ENTITY error code and the error message
         res.status(422).json(error);
     }
@@ -36,8 +36,8 @@ router.get('/:id', async function(req, res) {
     res.status(HttpStatus.NOT_FOUND).end();
   }
 });
-/*
-router.patch('/:id', interceptors.requireLogin, async function(req, res) {
+
+router.patch('/:id', async function(req, res) {
   const rows = await models.Skill.findByPk(req.params.id);
   if (rows) {
     try {
@@ -51,7 +51,7 @@ router.patch('/:id', interceptors.requireLogin, async function(req, res) {
   }
 })
 
-router.delete('/:id', interceptors.requireLogin, async function(req, res) {
+router.delete('/:id', async function(req, res) {
   const rows = await models.Skill.findByPk(req.params.id);
   if (rows) {
     await rows.destroy();
@@ -59,6 +59,6 @@ router.delete('/:id', interceptors.requireLogin, async function(req, res) {
   } else {
     res.status(HttpStatus.NOT_FOUND).end();
   }
-});*/
+});
 
 module.exports = router;

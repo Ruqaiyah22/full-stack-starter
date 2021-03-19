@@ -34,4 +34,5 @@ function SkillsList(){
         </main>
     );
 }
+
 export default SkillsList;

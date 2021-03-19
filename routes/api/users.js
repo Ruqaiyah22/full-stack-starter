@@ -62,7 +62,7 @@ router.patch('/:id', interceptors.requireAdmin, function(req, res, next) {
   }).then(function(user){
     res.json(user.toJSON());
   }).catch(function(error) {
-    console.log(error);
+    // console.log(error);
     if (error.name == 'SequelizeValidationError') {
       res.status(422).json({
         status: 422,
