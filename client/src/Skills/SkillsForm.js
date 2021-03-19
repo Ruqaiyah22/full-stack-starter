@@ -5,29 +5,30 @@ import Api from "../Api";
 function SkillsForm() {
     const {id} = useParams();
     const history = useHistory();
-    const [skills, setSkills] = useState({
+    const [skill, setSkill] = useState({
         name: '',
+        position: 0,
     });
 
     useEffect(function(){
         if (id) {
-            Api.skills.get(id).then((response) => setSkills(response.data));
+            Api.skills.get(id).then((response) => setSkill(response.data));
         }
     }, []);
 
     function onChange(event) {
-        const newSkill = {...skills};
+        const newSkill = {...skill};
         newSkill[event.target.name] = event.target.value;
-        setSkills(newSkill);
+        setSkill(newSkill);
     }
 
     async function onSubmit(event){
         event.preventDefault();
         try {
             if (id) {
-                await Api.skills.update(id, skills);
+                await Api.skills.update(id, skill);
             } else {
-                await Api.skills.create(skills);
+                await Api.skills.create(skill);
             }
             history.push('/skills');
         } catch (error) {
@@ -41,11 +42,15 @@ function SkillsForm() {
         <form onSubmit={onSubmit}>
         <div className="mb-3">
             <label className="form-label">Name</label>
-            <input className="form-control" type="text" name="name" value={skills.name} onChange={onChange} />
+            <input className="form-control" type="text" name="name" value={skill.name} onChange={onChange} />
+        </div>
+        <div className="mb-3">
+            <label className="form-label">Position</label>
+            <input className="form-control" type="text" name="position" value={skill.position} onChange={onChange}/>
         </div>
         <button className="btn btn-primary" type="submit">Submit</button>
         </form>
-        <p>{JSON.stringify(skills.name)}</p>
+        <p>{JSON.stringify(skill.name)}</p>
     </main>
     )
 }

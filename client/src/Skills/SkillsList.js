@@ -26,7 +26,7 @@ function SkillsList(){
         <ul>
             {skills.map(s => (
                 <li key= {s.id}>
-                    <p><Link to={`/skills/${s.id}/edit`}>{s.name}</Link></p>
+                    <p><Link to={`/skills/${s.id}/edit`}>{s.name}{s.position}</Link></p>
                     <p><button onClick={() => onDelete(s)} type="button" className="btn btn-sm btn-danger">Delete</button></p>
                 </li>
             ))}

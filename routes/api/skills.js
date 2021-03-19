@@ -1,8 +1,12 @@
+'use strict';
+
 const express = require('express');
+const HttpStatus = require('http-status-codes');
+
+const interceptors = require('../interceptors');
+const models = require('../../models');
 
 const router = express.Router();
-
-const models = require('../../models');
 
 router.get('/', async function(req, res) { // if it matches
     const rows = await models.Skill.findAll(); // "s" at the end or no?
@@ -12,7 +16,7 @@ router.get('/', async function(req, res) { // if it matches
     //]);
 });
 
-router.post('/', async function (req, res){
+router.post('/', interceptors.requireLogin, async function (req, res){
     // build a new skill rows in memory from the form data in the body of the request
     const rows = models.Skill.build(req.body);
     try {
@@ -37,7 +41,7 @@ router.get('/:id', async function(req, res) {
   }
 });
 
-router.patch('/:id', async function(req, res) {
+router.patch('/:id', interceptors.requireLogin, async function(req, res) {
   const rows = await models.Skill.findByPk(req.params.id);
   if (rows) {
     try {
@@ -51,7 +55,7 @@ router.patch('/:id', async function(req, res) {
   }
 })
 
-router.delete('/:id', async function(req, res) {
+router.delete('/:id', interceptors.requireLogin, async function(req, res) {
   const rows = await models.Skill.findByPk(req.params.id);
   if (rows) {
     await rows.destroy();

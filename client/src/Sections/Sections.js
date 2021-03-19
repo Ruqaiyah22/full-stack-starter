@@ -1,11 +1,3 @@
-/*function Sections() {
-    return (
-        <h1>Sections</h1>
-    )
-}
-
-export default Sections;
-*/
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
 import SectionsList from './SectionsList';
